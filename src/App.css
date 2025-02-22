@@ -1,0 +1,67 @@
+.genel {
+    background-color: var(--bej);
+}
+
+main {
+    margin: auto;
+    max-width: 400px;
+    color: var(--acik-gri);
+}
+
+h1 {
+    text-align: center;
+    color: var(--koyu-gri);
+    font-size: 25px;
+    margin-top: 15px;
+}
+
+h2 {
+    color: var(--koyu-gri);
+}
+
+.malzemeler label {
+    font-weight: bold;
+}
+
+
+.istatistik {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fiyat {
+    color: var(--koyu-gri);
+    font-weight: bold;
+    width: 50%;
+}
+
+.puan-degerlendirme {
+    display: flex;
+    width: 50%;
+}
+
+.puan {
+    width: 50%;
+}
+
+h2 span {
+    color: var(--kirmizi);
+}
+
+.btn-siparis {
+    background-color: var(--sari);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+@media (max-width: 480px) {
+    main {
+        max-width: 90%;
+    }
+}

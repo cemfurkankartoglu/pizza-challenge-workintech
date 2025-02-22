@@ -1,12 +1,7 @@
 header {
     background-color: var(--kirmizi);
-}
-
-nav a {
-    text-decoration: none;
-    color: white
-}
-
-.duz-cizgi {
-    color: white;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
