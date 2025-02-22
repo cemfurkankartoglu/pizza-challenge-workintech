@@ -1,0 +1,9 @@
+.navbar {
+    background-color: #CE2829;
+    display: flex;
+}
+
+
+.navbar-nav .nav-link {
+    color: white
+}

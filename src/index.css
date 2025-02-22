@@ -1,5 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --acik-gri: #5F5F5F;
+  --koyu-gri: #292929;
+  --sari: #FDC913;
+  --kirmizi: #CE2829;
+  --bej: #FAF7F2;
+
+  font-family: "Roboto Condensed", "Barlow", "Quattrocento", "Satisfy", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #213547;
@@ -15,6 +21,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #747bff;
 }
@@ -43,9 +50,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
