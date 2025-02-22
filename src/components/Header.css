@@ -1,9 +1,12 @@
-.navbar {
-    background-color: #CE2829;
-    display: flex;
+header {
+    background-color: var(--kirmizi);
 }
 
-
-.navbar-nav .nav-link {
+nav a {
+    text-decoration: none;
     color: white
+}
+
+.duz-cizgi {
+    color: white;
 }
