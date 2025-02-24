@@ -1,6 +1,6 @@
-header {
+.header {
     background-color: var(--kirmizi);
-    height: 15vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;

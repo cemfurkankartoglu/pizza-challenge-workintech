@@ -1,18 +1,16 @@
-nav {
+.navbar {
     background-color: var(--kirmizi);
-    text-align: center;
-    height: 5vh;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-nav a {
+.nav-link {
     text-decoration: none;
     color: var(--bej);
 }
 
-nav a:last-child {
+.active-link {
     font-weight: bold;
-}
-
-.duz-cizgi {
-    color: var(--bej);
 }

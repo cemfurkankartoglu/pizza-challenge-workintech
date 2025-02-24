@@ -3,8 +3,9 @@
 }
 
 main {
+    background-color: var(--bej);
     margin: auto;
-    max-width: 400px;
+    width: 532px;
     color: var(--acik-gri);
 }
 
@@ -21,6 +22,8 @@ h2 {
 
 .malzemeler label {
     font-weight: bold;
+    margin-bottom: 8px;
+    display: inline-block;
 }
 
 
@@ -56,6 +59,21 @@ h2 span {
     display: block;
     width: 100%;
     text-align: center;
+    cursor: pointer;
+}
+
+.hamur select {
+    cursor: pointer
+}
+
+
+button {
+    cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    cursor: pointer;
 }
 
 
