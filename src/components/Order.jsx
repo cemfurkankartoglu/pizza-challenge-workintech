@@ -9,7 +9,7 @@ export default function Order() {
   return (
     <main className="order-container">
       <section className='aciklama'>
-        <h1>Position Absolute Acı Pizza</h1>
+        <h1 className="pizza-baslik">Position Absolute Acı Pizza</h1>
         <div className='istatistik'>
           <div className="fiyat">85.50₺</div>
           <div className='puan-degerlendirme'>
@@ -23,15 +23,26 @@ export default function Order() {
       <section className='secimler'>
         <form>
           <div className='boyut'>
-            <h2>Boyut Seç<span>*</span></h2>
-            <input type='radio' name="boyut" value="small" />Küçük
-            <input type='radio' name="boyut" value="medium" />Orta
-            <input type='radio' name="boyut" value="large" />Büyük
+            <h2 className="secimler-baslik">Boyut Seç<span className="yildiz">*</span></h2>
+            <label>
+              <input type="radio" name="boyut" value="small" />
+              Küçük
+            </label>
+
+            <label>
+              <input type="radio" name="boyut" value="medium" />
+              Orta
+            </label>
+
+            <label>
+              <input type="radio" name="boyut" value="large" />
+              Büyük
+            </label>
           </div>
 
           <div className='hamur'>
-            <h2>Hamur Seç<span>*</span></h2>
-            <select name="hamur">
+            <h2 className="secimler-baslik">Hamur Seç<span className="yildiz">*</span></h2>
+            <select className="hamur-secim" name="hamur">
               <option>Hamur Kalınlığı</option>
               <option value="ince">İnce Hamur</option>
               <option value="kalin">Kalın Hamur</option>
@@ -41,7 +52,7 @@ export default function Order() {
           </div>
 
           <div className='malzemeler'>
-            <h2>Ek Malzemeler</h2>
+            <h2 className="secimler-baslik">Ek Malzemeler</h2>
             <label htmlFor="pepperoni">
               <input type="checkbox" name="malzeme" value="pepperoni" id="pepperoni" />
               Pepperoni
@@ -100,8 +111,9 @@ export default function Order() {
             </label>
           </div>
 
+
           <div className='siparis-notu'>
-            <h2>Sipariş Notu</h2>
+            <h2 className="secimler-baslik">Sipariş Notu</h2>
             <textarea placeholder="Siparişin eklemek istediğin bir not var mı?" />
           </div>
         </form >
@@ -114,14 +126,19 @@ export default function Order() {
             <button className="artir">+</button>
           </div>
           <div className='fatura'>
-            <h2>Sipariş Toplamı</h2>
-            <p>Seçimler</p>
-            <p>Toplam</p>
+            <h2 className="secimler-baslik">Sipariş Toplamı</h2>
+            <div className="secimler-fiyat">
+              <p>Seçimler</p>
+              <p>25.00₺</p>
+            </div>
+            <div className="toplam-fiyat">
+              <p>Toplam</p>
+              <p>100.00₺</p>
+            </div>
             <button type="submit" className='btn-siparis'>SİPARİŞ VER</button>
           </div>
         </section>
-
-      </section >
+      </section>
     </main >
   )
 }

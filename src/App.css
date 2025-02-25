@@ -1,3 +1,12 @@
+.hamur-secim,
+button,
+input[type="radio"],
+input[type="checkbox"],
+.malzemeler label,
+.boyut label {
+    cursor: pointer
+}
+
 .header {
     background-color: var(--kirmizi);
     height: 10vh;
@@ -6,12 +15,17 @@
     justify-content: center;
 }
 
+.logo {
+    padding-top: 5rem;
+}
+
 .navbar {
     background-color: var(--kirmizi);
-    height: 10vh;
+    height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3rem;
 }
 
 .nav-link {
@@ -36,15 +50,10 @@
     height: 100vh;
 }
 
-.menu-baslik {
-    color: var(--bej);
-}
-
-.order-container {
-    background-color: var(--bej);
-    margin: auto;
-    width: 532px;
-    color: var(--acik-gri);
+.btn-aciktim {
+    color: var(--koyu-gri);
+    background-color: var(--sari);
+    border-radius: 5px;
 }
 
 .success-container {
@@ -59,32 +68,18 @@
     color: var(--bej)
 }
 
-.btn-aciktim {
-    color: var(--koyu-gri);
-    background-color: var(--sari);
-    border-radius: 5px;
+.order-container {
+    background-color: var(--bej);
+    margin: auto;
+    width: 532px;
+    color: var(--acik-gri);
 }
 
-.logo {
-    padding-top: 5rem;
-}
-
-h1 {
+.pizza-baslik {
     text-align: center;
     color: var(--koyu-gri);
-    font-size: 25px;
+    font-size: 2rem;
 }
-
-h2 {
-    color: var(--koyu-gri);
-}
-
-.malzemeler label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: inline-block;
-}
-
 
 .istatistik {
     display: flex;
@@ -107,8 +102,38 @@ h2 {
     width: 50%;
 }
 
-h2 span {
+.secimler-baslik {
+    color: var(--koyu-gri);
+    font-weight: bold;
+}
+
+.yildiz {
     color: var(--kirmizi);
+}
+
+.malzemeler label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.son {
+    display: flex;
+    flex-direction: column;
+}
+
+.adet-container {
+    display: flex;
+}
+
+.secimler-fiyat {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toplam-fiyat {
+    display: flex;
+    justify-content: space-between;
 }
 
 .btn-siparis {
@@ -118,24 +143,7 @@ h2 span {
     display: block;
     width: 100%;
     text-align: center;
-    cursor: pointer;
 }
-
-.hamur select {
-    cursor: pointer
-}
-
-
-button {
-    cursor: pointer;
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-    cursor: pointer;
-}
-
-
 
 @media (max-width: 480px) {
     main {
