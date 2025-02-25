@@ -1,20 +1,31 @@
 import "./reset.css";
+import "./index.css"
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Nav from "./components/Nav"
 import Home from "./components/Home";
 import Order from "./components/Order";
+import Success from "./components/Success"
 
 
 export default function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Header />
             <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/order" component={Order} />
+                <Route exact path="/" >
+                    <Home />
+                </Route>
+                <Route path="/order">
+                    <Nav />
+                    <Order />
+                </Route>
+                <Route path="/success">
+                    <Success />
+                </Route>
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 }

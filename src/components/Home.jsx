@@ -1,13 +1,12 @@
-import { useState } from "react";
-import Order from "./Order";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-    const [showOrder, setShowOrder] = useState(false);
     return (
-        <main className="menu-container">
-            <h1 className="menu-baslik">KOD ACIKTIRIR PİZZA DOYURUR</h1>
-            <button onClick={() => setShowOrder(true)}>ACIKTIM</button>
-            {showOrder && <Order />}
+        <main className="home-container">
+            <h1 className="home-baslik">KOD ACIKTIRIR PİZZA DOYURUR</h1>
+            <Link to="/order">
+                <button aria-label="Sipariş sayfasına git" className="btn-aciktim">ACIKTIM</button>
+            </Link>
         </main>
     )
 }

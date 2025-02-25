@@ -1,14 +1,3 @@
-:root {
-    font-size: 16px;
-    font-family: "Roboto Condensed", "Barlow", "Quattrocento", "Satisfy", "sans-serif";
-
-    --acik-gri: #5F5F5F;
-    --koyu-gri: #292929;
-    --sari: #FDC913;
-    --kirmizi: #CE2829;
-    --bej: #FAF7F2;
-}
-
 .header {
     background-color: var(--kirmizi);
     height: 10vh;
@@ -34,35 +23,38 @@
     font-weight: bold;
 }
 
-.menu-container {
-    background-color: var(--kirmizi);
+.home-container {
+    background-image: url("./images/iteration-1-images/home-banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .menu-baslik {
     color: var(--bej);
-
 }
 
-.genel {
-    background-color: var(--bej);
-}
-
-main {
+.order-container {
     background-color: var(--bej);
     margin: auto;
     width: 532px;
     color: var(--acik-gri);
 }
 
+.success-container {
+    background-color: var(--kirmizi);
+}
+
 h1 {
     text-align: center;
     color: var(--koyu-gri);
     font-size: 25px;
-    margin-top: 15px;
 }
 
 h2 {

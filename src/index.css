@@ -1,4 +1,10 @@
 :root {
     font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Roboto Condensed", "Barlow", "Quattrocento", "Satisfy", "sans-serif";
+
+    --acik-gri: #5F5F5F;
+    --koyu-gri: #292929;
+    --sari: #FDC913;
+    --kirmizi: #CE2829;
+    --bej: #FAF7F2;
 }
