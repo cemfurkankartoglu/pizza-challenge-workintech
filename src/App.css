@@ -49,6 +49,24 @@
 
 .success-container {
     background-color: var(--kirmizi);
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-baslik {
+    color: var(--bej)
+}
+
+.btn-aciktim {
+    color: var(--koyu-gri);
+    background-color: var(--sari);
+    border-radius: 5px;
+}
+
+.logo {
+    padding-top: 5rem;
 }
 
 h1 {
