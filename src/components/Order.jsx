@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./Order.css";
 import Nav from "./Nav";
 
 export default function Order() {
