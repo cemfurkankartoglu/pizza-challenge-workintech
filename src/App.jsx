@@ -8,6 +8,7 @@ import Nav from "./components/Nav"
 import Home from "./components/Home";
 import Order from "./components/Order";
 import Success from "./components/Success"
+import Options from "./components/Options"
 
 
 export default function App() {
@@ -24,6 +25,9 @@ export default function App() {
                 </Route>
                 <Route path="/success">
                     <Success />
+                </Route>
+                <Route path="/options">
+                    <Options />
                 </Route>
             </Switch>
         </BrowserRouter>

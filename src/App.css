@@ -68,6 +68,19 @@ input[type="checkbox"],
     color: var(--bej)
 }
 
+.options-container {
+    background-color: var(--kirmizi);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.options-baslik {
+    font-size: 2rem;
+    color: var(--bej)
+}
+
 .order-container {
     background-color: var(--bej);
     margin: auto;
