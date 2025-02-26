@@ -15,7 +15,7 @@ export default function Order() {
   const [adet, setAdet] = useState(1);
   const [isSelected, setISelected] = useState(false);
 
-  const sizes = ["small", "medium", "large"];
+  const sizes = ["küçük", "orta", "büyük"];
   const doughTypes = [
     { value: "normal", label: "Normal Hamur" },
     { value: "ince", label: "İnce Hamur" },
@@ -23,9 +23,9 @@ export default function Order() {
     { value: "super-ince", label: "Süper İnce Hamur" },
   ];
   const ingredients = [
-    "pepperoni", "sosis", "kanada-jambonu", "tavuk-izgara",
-    "sogan", "domates", "misir", "sucuk", "jalepeno",
-    "sarimsak", "biber", "ananas", "kabak", "pastirma"
+    "pepperoni", "sosis", "jambon", "tavuk",
+    "soğan", "domates", "mısır", "sucuk", "jalepeno",
+    "sarımsak", "biber", "ananas", "kabak", "pastırma"
   ];
 
   useEffect(() => {
@@ -95,8 +95,6 @@ export default function Order() {
 
   }
 
-
-
   return (
     <main className="order-container">
 
@@ -119,7 +117,7 @@ export default function Order() {
               <h2 className="secimler-baslik">Boyut Seç<span className="yildiz">*</span></h2>
               {sizes.map((size) => (
                 <label key={size}>
-                  <input
+                  <input className="boyut-button"
                     type="radio"
                     name="boyut"
                     value={size}
@@ -139,7 +137,7 @@ export default function Order() {
                 value={formData.hamur}
                 onChange={handleChange}
               >
-                <option value="">Hamur Kalınlığı</option>
+                <option className="hamur-kalinligi" value="">Hamur Kalınlığı</option>
                 {doughTypes.map((dough) => (
                   <option key={dough.value} value={dough.value}>
                     {dough.label}
@@ -152,30 +150,32 @@ export default function Order() {
           <div className='malzemeler'>
             <h2 className="secimler-baslik">Ek Malzemeler</h2>
             <p className="malzeme-paragraf">En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
-            {ingredients.map((ingredient) => (
-              <label key={ingredient} htmlFor={ingredient}>
-                <input
-                  type="checkbox"
-                  name="malzemeler"
-                  value={ingredient}
-                  id={ingredient}
-                  checked={formData.malzemeler.includes(ingredient)}
-                  onChange={handleChange}
-                  disabled={
-                    !formData.malzemeler.includes(ingredient) &&
-                    formData.malzemeler.length >= 10
-                  }
-                />
-                {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
-              </label>
-            ))}
+            <div className="malzeme-container">
+              {ingredients.map((ingredient) => (
+                <label className="malzeme-item" key={ingredient} htmlFor={ingredient}>
+                  <input className="checkbox"
+                    type="checkbox"
+                    name="malzemeler"
+                    value={ingredient}
+                    id={ingredient}
+                    checked={formData.malzemeler.includes(ingredient)}
+                    onChange={handleChange}
+                    disabled={
+                      !formData.malzemeler.includes(ingredient) &&
+                      formData.malzemeler.length >= 10
+                    }
+                  />
+                  {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
+                </label>
+              ))}
+            </div>
           </div>
           <div className="isim-container">
             <input onChange={handleChange} value={formData.isim} name="isim" type="text" placeholder="Lütfen isminizi giriniz"></input>
           </div>
           <div className='siparis-notu'>
-            <h2 className="secimler-baslik">Sipariş Notu</h2>
-            <textarea
+            <h2 className="secimler-baslik siparis-baslik">Sipariş Notu</h2>
+            <textarea className="siparis-textarea"
               name="notlar"
               value={formData.notlar}
               onChange={handleChange}
@@ -187,29 +187,36 @@ export default function Order() {
           <hr />
 
           <section className='son'>
+
             <div className='adet-container'>
               <button type="button" className="azalt" onClick={decreaseQuantity}>-</button>
               <p>{adet}</p>
               <button type="button" className="artir" onClick={increaseQuantity}>+</button>
             </div>
+
             <div className='fatura'>
               <h2 className="secimler-baslik">Sipariş Toplamı</h2>
+
               <div className="secimler-fiyat">
                 <p>Seçimler</p>
                 <p>25.00₺</p>
               </div>
+
               <div className="toplam-fiyat">
                 <p>Toplam</p>
-                <p>100.00₺</p>
+                <p>110.50₺</p>
               </div>
+
               <Link
                 to="/success"
                 onClick={isSelected ? handleSubmit : null}
-                className='btn-siparis'
+                id='btn-siparis'
                 style={{ pointerEvents: isSelected ? 'auto' : 'none' }}
               >
                 SİPARİŞ VER
-              </Link>            </div>
+              </Link>
+
+            </div>
           </section>
         </form>
       </section>
