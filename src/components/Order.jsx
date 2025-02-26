@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Order() {
@@ -8,10 +8,11 @@ export default function Order() {
     hamur: "",
     malzemeler: [],
     notlar: "",
-    adet: 1,
   }
 
   const [formData, setFormData] = useState(initialValue);
+  const [adet, setAdet] = useState(1);
+  const [isSelected, setISelected] = useState(false);
 
   const sizes = ["small", "medium", "large"];
   const doughTypes = [
@@ -26,6 +27,30 @@ export default function Order() {
     "sarimsak", "biber", "ananas", "kabak", "pastirma"
   ];
 
+  useEffect(() => {
+    // Update the isSelected state based on current formData
+    if (
+      formData.boyut &&
+      formData.hamur &&
+      formData.malzemeler.length >= 4 &&
+      formData.malzemeler.length <= 10 &&
+      formData.isim.length >= 3
+    ) {
+      setISelected(true);
+    } else {
+      setISelected(false);
+    }
+  }, [formData]);
+
+  function increaseQuantity() {
+    setAdet(adet + 1);
+  }
+
+  function decreaseQuantity() {
+    if (adet > 1) {
+      setAdet(adet - 1);
+    }
+  }
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -39,6 +64,7 @@ export default function Order() {
         ...formData,
         malzemeler: newMalzemeler,
       });
+
     } else {
       setFormData({
         ...formData,
@@ -51,14 +77,18 @@ export default function Order() {
     event.preventDefault();
 
     const orderData = {
+      isim: formData.isim,
       boyut: formData.boyut,
       hamur: formData.hamur,
       malzemeler: formData.malzemeler,
       notlar: formData.notlar,
+      adet: adet
     };
 
     axios.post("https://reqres.in/api/pizza", orderData).then((response) => {
-      console.log(response.data)
+      console.log(response.data);
+      setFormData(initialValue);
+      setAdet(1)
     }).catch((error) => {
       console.log(error)
     })
@@ -131,13 +161,18 @@ export default function Order() {
                   id={ingredient}
                   checked={formData.malzemeler.includes(ingredient)}
                   onChange={handleChange}
+                  disabled={
+                    !formData.malzemeler.includes(ingredient) &&
+                    formData.malzemeler.length >= 10
+                  }
                 />
                 {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
               </label>
             ))}
           </div>
-
-
+          <div className="isim-container">
+            <input onChange={handleChange} value={formData.isim} name="isim" type="text" placeholder="Lütfen isminizi giriniz"></input>
+          </div>
           <div className='siparis-notu'>
             <h2 className="secimler-baslik">Sipariş Notu</h2>
             <textarea
@@ -147,29 +182,30 @@ export default function Order() {
               placeholder="Siparişine eklemek istediğin bir not var mı?"
             />
           </div>
+
+
+          <hr />
+
+          <section className='son'>
+            <div className='adet-container'>
+              <button type="button" className="azalt" onClick={decreaseQuantity}>-</button>
+              <p>{adet}</p>
+              <button type="button" className="artir" onClick={increaseQuantity}>+</button>
+            </div>
+            <div className='fatura'>
+              <h2 className="secimler-baslik">Sipariş Toplamı</h2>
+              <div className="secimler-fiyat">
+                <p>Seçimler</p>
+                <p>25.00₺</p>
+              </div>
+              <div className="toplam-fiyat">
+                <p>Toplam</p>
+                <p>100.00₺</p>
+              </div>
+              <button disabled={!isSelected} type="submit" className='btn-siparis'>SİPARİŞ VER</button>
+            </div>
+          </section>
         </form>
-
-        <hr />
-
-        <section className='son'>
-          <div className='adet-container'>
-            <button className="azalt">-</button>
-            <p>1</p>
-            <button className="artir">+</button>
-          </div>
-          <div className='fatura'>
-            <h2 className="secimler-baslik">Sipariş Toplamı</h2>
-            <div className="secimler-fiyat">
-              <p>Seçimler</p>
-              <p>25.00₺</p>
-            </div>
-            <div className="toplam-fiyat">
-              <p>Toplam</p>
-              <p>100.00₺</p>
-            </div>
-            <button type="submit" className='btn-siparis'>SİPARİŞ VER</button>
-          </div>
-        </section>
       </section>
     </main>
   );
