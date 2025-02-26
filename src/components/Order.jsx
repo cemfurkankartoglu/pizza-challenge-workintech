@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 export default function Order() {
@@ -74,7 +75,6 @@ export default function Order() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
 
     const orderData = {
       isim: formData.isim,
@@ -202,8 +202,14 @@ export default function Order() {
                 <p>Toplam</p>
                 <p>100.00₺</p>
               </div>
-              <button disabled={!isSelected} type="submit" className='btn-siparis'>SİPARİŞ VER</button>
-            </div>
+              <Link
+                to="/success"
+                onClick={isSelected ? handleSubmit : null}
+                className='btn-siparis'
+                style={{ pointerEvents: isSelected ? 'auto' : 'none' }}
+              >
+                SİPARİŞ VER
+              </Link>            </div>
           </section>
         </form>
       </section>
