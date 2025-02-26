@@ -1,13 +1,75 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function Order() {
-  const [size] = useState("");
-  const [dough, setDough] = useState("");
-  const [toppings, setToppings] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const initialValue = {
+    isim: "",
+    boyut: "",
+    hamur: "",
+    malzemeler: [],
+    notlar: "",
+    adet: 1,
+  }
+
+  const [formData, setFormData] = useState(initialValue);
+
+  const sizes = ["small", "medium", "large"];
+  const doughTypes = [
+    { value: "normal", label: "Normal Hamur" },
+    { value: "ince", label: "İnce Hamur" },
+    { value: "parmesan", label: "Parmesanlı Hamur" },
+    { value: "super-ince", label: "Süper İnce Hamur" },
+  ];
+  const ingredients = [
+    "pepperoni", "sosis", "kanada-jambonu", "tavuk-izgara",
+    "sogan", "domates", "misir", "sucuk", "jalepeno",
+    "sarimsak", "biber", "ananas", "kabak", "pastirma"
+  ];
+
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target;
+
+    if (type === "checkbox") {
+      const newMalzemeler = checked
+        ? [...formData.malzemeler, value]
+        : formData.malzemeler.filter(item => item !== value);
+
+      setFormData({
+        ...formData,
+        malzemeler: newMalzemeler,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const orderData = {
+      boyut: formData.boyut,
+      hamur: formData.hamur,
+      malzemeler: formData.malzemeler,
+      notlar: formData.notlar,
+    };
+
+    axios.post("https://reqres.in/api/pizza", orderData).then((response) => {
+      console.log(response.data)
+    }).catch((error) => {
+      console.log(error)
+    })
+
+  }
+
+
 
   return (
     <main className="order-container">
+
       <section className='aciklama'>
         <h1 className="pizza-baslik">Position Absolute Acı Pizza</h1>
         <div className='istatistik'>
@@ -21,102 +83,72 @@ export default function Order() {
       </section>
 
       <section className='secimler'>
-        <form>
-          <div className='boyut'>
-            <h2 className="secimler-baslik">Boyut Seç<span className="yildiz">*</span></h2>
-            <label>
-              <input type="radio" name="boyut" value="small" />
-              Küçük
-            </label>
+        <form className="form-container" onSubmit={handleSubmit}>
+          <div className="boyut-hamur">
+            <div className='boyut'>
+              <h2 className="secimler-baslik">Boyut Seç<span className="yildiz">*</span></h2>
+              {sizes.map((size) => (
+                <label key={size}>
+                  <input
+                    type="radio"
+                    name="boyut"
+                    value={size}
+                    checked={formData.boyut === size}
+                    onChange={handleChange}
+                  />
+                  {size.charAt(0).toUpperCase() + size.slice(1)}
+                </label>
+              ))}
+            </div>
 
-            <label>
-              <input type="radio" name="boyut" value="medium" />
-              Orta
-            </label>
-
-            <label>
-              <input type="radio" name="boyut" value="large" />
-              Büyük
-            </label>
-          </div>
-
-          <div className='hamur'>
-            <h2 className="secimler-baslik">Hamur Seç<span className="yildiz">*</span></h2>
-            <select className="hamur-secim" name="hamur">
-              <option>Hamur Kalınlığı</option>
-              <option value="ince">İnce Hamur</option>
-              <option value="kalin">Kalın Hamur</option>
-              <option value="parmesan">Parmesanlı Hamur</option>
-              <option value="çamurlu">Çamurlu Hamur</option>
-            </select>
+            <div className='hamur'>
+              <h2 className="secimler-baslik">Hamur Seç<span className="yildiz">*</span></h2>
+              <select
+                className="hamur-secim"
+                name="hamur"
+                value={formData.hamur}
+                onChange={handleChange}
+              >
+                <option value="">Hamur Kalınlığı</option>
+                {doughTypes.map((dough) => (
+                  <option key={dough.value} value={dough.value}>
+                    {dough.label}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className='malzemeler'>
             <h2 className="secimler-baslik">Ek Malzemeler</h2>
-            <label htmlFor="pepperoni">
-              <input type="checkbox" name="malzeme" value="pepperoni" id="pepperoni" />
-              Pepperoni
-            </label>
-            <label htmlFor="sosis">
-              <input type="checkbox" name="malzeme" value="sosis" id="sosis" />
-              Sosis
-            </label>
-            <label htmlFor="kanada-jambonu">
-              <input type="checkbox" name="malzeme" value="kanada-jambonu" id="kanada-jambonu" />
-              Kanada Jambonu
-            </label>
-            <label htmlFor="tavuk-izgara">
-              <input type="checkbox" name="malzeme" value="tavuk-izgara" id="tavuk-izgara" />
-              Tavuk Izgara
-            </label>
-            <label htmlFor="sogan">
-              <input type="checkbox" name="malzeme" value="sogan" id="sogan" />
-              Soğan
-            </label>
-            <label htmlFor="domates">
-              <input type="checkbox" name="malzeme" value="domates" id="domates" />
-              Domates
-            </label>
-            <label htmlFor="misir">
-              <input type="checkbox" name="malzeme" value="misir" id="misir" />
-              Mısır
-            </label>
-            <label htmlFor="sucuk">
-              <input type="checkbox" name="malzeme" value="sucuk" id="sucuk" />
-              Sucuk
-            </label>
-            <label htmlFor="jalepeno">
-              <input type="checkbox" name="malzeme" value="jalepeno" id="jalepeno" />
-              Jalepeno
-            </label>
-            <label htmlFor="sarimsak">
-              <input type="checkbox" name="malzeme" value="sarimsak" id="sarimsak" />
-              Sarımsak
-            </label>
-            <label htmlFor="biber">
-              <input type="checkbox" name="malzeme" value="biber" id="biber" />
-              Biber
-            </label>
-            <label htmlFor="ananas">
-              <input type="checkbox" name="malzeme" value="ananas" id="ananas" />
-              Ananas
-            </label>
-            <label htmlFor="kabak">
-              <input type="checkbox" name="malzeme" value="kabak" id="kabak" />
-              Kabak
-            </label>
-            <label htmlFor="pastirma">
-              <input type="checkbox" name="malzeme" value="pastirma" id="pastirma" />
-              Pastırma
-            </label>
+            <p className="malzeme-paragraf">En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
+            {ingredients.map((ingredient) => (
+              <label key={ingredient} htmlFor={ingredient}>
+                <input
+                  type="checkbox"
+                  name="malzemeler"
+                  value={ingredient}
+                  id={ingredient}
+                  checked={formData.malzemeler.includes(ingredient)}
+                  onChange={handleChange}
+                />
+                {ingredient.charAt(0).toUpperCase() + ingredient.slice(1)}
+              </label>
+            ))}
           </div>
 
 
           <div className='siparis-notu'>
             <h2 className="secimler-baslik">Sipariş Notu</h2>
-            <textarea placeholder="Siparişin eklemek istediğin bir not var mı?" />
+            <textarea
+              name="notlar"
+              value={formData.notlar}
+              onChange={handleChange}
+              placeholder="Siparişine eklemek istediğin bir not var mı?"
+            />
           </div>
-        </form >
+        </form>
+
         <hr />
 
         <section className='son'>
@@ -139,6 +171,6 @@ export default function Order() {
           </div>
         </section>
       </section>
-    </main >
-  )
+    </main>
+  );
 }
