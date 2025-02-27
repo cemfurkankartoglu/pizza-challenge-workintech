@@ -1,3 +1,14 @@
+:root {
+    font-size: 16px;
+    font-family: "Roboto Condensed", "Barlow", "Quattrocento", "Satisfy", "sans-serif";
+
+    --acik-gri: #5F5F5F;
+    --koyu-gri: #292929;
+    --sari: #FDC913;
+    --kirmizi: #CE2829;
+    --bej: #FAF7F2;
+}
+
 .hamur-secim,
 button,
 input[type="radio"],
