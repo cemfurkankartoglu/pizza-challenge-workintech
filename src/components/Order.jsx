@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
+const pizzalar = [{
+  isim: "Position Absolute Acı Pizza",
+  aciklama: "Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen. genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir.. Küçük bir pizzaya bazen pizzetta denir.",
+  fiyat: 85.5,
+  puan: 4.9,
+  degerlendirmeCount: 200
+}]
+
 export default function Order() {
   const initialValue = {
     isim: "",
@@ -10,6 +18,9 @@ export default function Order() {
     malzemeler: [],
     notlar: "",
   }
+
+  const [toppings, setToppings] = useState(0);
+  const [total, setTotal] = useState(pizzalar[0].fiyat)
 
   const [formData, setFormData] = useState(initialValue);
   const [adet, setAdet] = useState(1);
@@ -42,6 +53,14 @@ export default function Order() {
       setISelected(false);
     }
   }, [formData]);
+
+  useEffect(() => {
+    calculateToppings();
+  }, [formData.malzemeler]);
+
+  useEffect(() => {
+    calculateTotal();
+  }, [toppings, adet]);
 
   function increaseQuantity() {
     setAdet(adet + 1);
@@ -95,19 +114,27 @@ export default function Order() {
 
   }
 
+  function calculateToppings() {
+    setToppings(formData.malzemeler.length * 5);
+  }
+
+  function calculateTotal() {
+    setTotal((pizzalar[0].fiyat + toppings) * adet)
+  }
+
   return (
     <main className="order-container">
 
       <section className='aciklama'>
-        <h1 className="pizza-baslik">Position Absolute Acı Pizza</h1>
+        <h1 className="pizza-baslik">{pizzalar[0].isim}</h1>
         <div className='istatistik'>
-          <div className="fiyat">85.50₺</div>
+          <div className="fiyat">{pizzalar[0].fiyat}</div>
           <div className='puan-degerlendirme'>
-            <div className='puan'>4.9</div>
-            <div className='degerlendirme'>(200)</div>
+            <div className='puan'>{pizzalar[0].puan}</div>
+            <div className='degerlendirme'>({pizzalar[0].degerlendirmeCount})</div>
           </div>
         </div>
-        <p>Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen. genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir.. Küçük bir pizzaya bazen pizzetta denir. </p>
+        <p>{pizzalar[0].aciklama}</p>
       </section>
 
       <section className='secimler'>
@@ -199,12 +226,12 @@ export default function Order() {
 
               <div className="secimler-fiyat">
                 <p>Seçimler</p>
-                <p>25.00₺</p>
+                <p>{toppings}.00₺</p>
               </div>
 
               <div className="toplam-fiyat">
                 <p>Toplam</p>
-                <p>110.50₺</p>
+                <p>{total}0₺</p>
               </div>
 
               <Link
